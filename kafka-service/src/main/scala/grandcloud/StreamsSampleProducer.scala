@@ -86,6 +86,7 @@ object StreamsSampleProducer extends App with StrictLogging {
           val downStreamVal: EitherInt = Left(new Exception("Not Even"))
           downStreamVal
         })
+        //How can we divert the errors to a kafka producer sink?
       .divertTo(specialHandler(producerSetup.as.log, producerSetup), _.isLeft)
       .to(Sink.foreach { eitherInt: EitherInt =>
         println(s"ODD:  $eitherInt")
